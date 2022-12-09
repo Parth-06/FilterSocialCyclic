@@ -2,10 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { TweetVal } from "../../Context/FetchContext";
 import useFetch from "../CustomHooks/useFetch";
-import useFetchConnect from "../CustomHooks/useFetchConnect";
 import "./Connect.css";
 import Connectcompo from "./Connectcompo";
-const { newData } = TweetVal();
 
 const Connect = () => {
   const navigate = useNavigate();
@@ -15,7 +13,7 @@ const Connect = () => {
   const [userDetails, setUserDetails] = useState([]);
   const [userdata, setUserdata] = useState([]);
   const [userTokenData] = useFetch();
-
+  const { newData } = TweetVal();
   useEffect(() => {
     setUserDetails(userTokenData);
   }, [userTokenData]);
