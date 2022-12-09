@@ -10,12 +10,10 @@ const HomeFollow = () => {
   const location = useLocation();
   const [userDetails, setUserDetails] = useState([]);
   const [userdata, setUserdata] = useState([]);
-  const [userConnectData] = useFetchConnect();
   const {
     Emojitate: { Emoji, Night },
     Emojidispatch,
   } = TweetVal();
-
   useEffect(() => {
     const Callmainpage = async () => {
       try {
@@ -41,8 +39,19 @@ const HomeFollow = () => {
   }, [newData]);
 
   useEffect(() => {
-    setUserdata(userConnectData);
-  }, [userConnectData]);
+    const Fetchtweet = async () => {
+      const res = await fetch("/connect", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      const data = await res.json();
+      setUserdata(data);
+    };
+    Fetchtweet();
+  }, [newData]);
 
   if (location.pathname !== "/") return null;
   return (

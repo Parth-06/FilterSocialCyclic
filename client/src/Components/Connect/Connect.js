@@ -5,6 +5,7 @@ import useFetch from "../CustomHooks/useFetch";
 import useFetchConnect from "../CustomHooks/useFetchConnect";
 import "./Connect.css";
 import Connectcompo from "./Connectcompo";
+const { newData } = TweetVal();
 
 const Connect = () => {
   const navigate = useNavigate();
@@ -14,15 +15,25 @@ const Connect = () => {
   const [userDetails, setUserDetails] = useState([]);
   const [userdata, setUserdata] = useState([]);
   const [userTokenData] = useFetch();
-  const [userConnectData] = useFetchConnect();
 
   useEffect(() => {
     setUserDetails(userTokenData);
   }, [userTokenData]);
 
   useEffect(() => {
-    setUserdata(userConnectData);
-  }, [userConnectData]);
+    const Fetchtweet = async () => {
+      const res = await fetch("/connect", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      const data = await res.json();
+      setUserdata(data);
+    };
+    Fetchtweet();
+  }, [newData]);
 
   return (
     <div className={Night ? "connect_home_main_day" : "connect_home_main"}>
