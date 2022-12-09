@@ -52,7 +52,7 @@ const HomeFollow = () => {
     };
     Fetchtweet();
   }, [newData]);
-
+  console.log("homefollw", userdata);
   if (location.pathname !== "/") return null;
   return (
     <div

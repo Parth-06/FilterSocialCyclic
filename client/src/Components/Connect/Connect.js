@@ -32,7 +32,7 @@ const Connect = () => {
     };
     Fetchtweet();
   }, [newData]);
-
+  console.log("connect", userdata);
   return (
     <div className={Night ? "connect_home_main_day" : "connect_home_main"}>
       <div className="connect_header">

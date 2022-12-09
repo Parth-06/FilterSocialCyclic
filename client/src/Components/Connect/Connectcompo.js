@@ -10,7 +10,6 @@ const Connectcompo = ({ userDetails, userdata }) => {
   const {
     Emojitate: { Night },
   } = TweetVal();
-  console.log("userdata", userdata);
   let alldata = userdata;
   if (userdata) {
     alldata = alldata.filter((items) => items.email !== userDetails.email);
