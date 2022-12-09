@@ -1,0 +1,220 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+.Header {
+  width: 21rem;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid rgb(85, 83, 83);
+}
+.Header_day {
+  width: 21rem;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid rgb(236, 236, 236);
+}
+.sec_header {
+  width: 15.4rem;
+  height: 100vh;
+  margin-left: 4rem;
+  /* border: 1px solid; */
+}
+
+.logo {
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  font-size: 20px;
+}
+.fa-toggle-on {
+  font-size: 40px;
+  cursor: pointer;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+.fa-toggle-off {
+  font-size: 40px;
+  cursor: pointer;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+.fa-moon {
+  font-size: 20px;
+}
+
+.fa-sun {
+  font-size: 20px;
+}
+.night_mode {
+  /* border: 1px solid; */
+  width: 8rem;
+  margin-top: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  margin-top: 2rem;
+  border-radius: 30px;
+}
+.navigation {
+  font-size: 20px;
+  list-style-type: none;
+  text-decoration: none;
+  /* font-weight: 500; */
+}
+
+.navigation li {
+  margin: 0.5rem 0rem;
+  border: 1px solid transparent;
+  padding: 13px 13px;
+  cursor: pointer;
+}
+
+.navigation li:hover {
+  border-radius: 25px;
+  width: auto;
+  background-color: rgb(22, 22, 22);
+}
+.navigation_day li {
+  margin: 0.5rem 0rem;
+  border: 1px solid transparent;
+  padding: 13px 13px;
+  cursor: pointer;
+}
+.navigation_day {
+  font-size: 20px;
+  list-style-type: none;
+  text-decoration: none;
+}
+
+.navigation_day li:hover {
+  border-radius: 25px;
+  width: auto;
+  background-color: rgb(230, 225, 225);
+}
+.fa-home {
+  margin-right: 20px;
+  font-size: 25px;
+}
+
+.fa-bell {
+  margin-right: 24px;
+  font-size: 25px;
+}
+
+.fa-user {
+  margin-right: 24px;
+  font-size: 25px;
+}
+
+.fa-bookmark {
+  margin-right: 24px;
+  font-size: 22px;
+  margin-right: 28px;
+}
+
+.fa-times-circle {
+  margin-right: 24px;
+  font-size: 25px;
+}
+
+.fa-user-plus {
+  margin-right: 20px;
+  font-size: 22px;
+}
+.fa-users {
+  margin-right: 16px;
+  font-size: 25px;
+}
+.fa-link {
+  margin-right: 24px;
+  font-size: 22px;
+}
+.tweeet_button {
+  width: 14rem;
+  height: 3rem;
+  font-size: 18px;
+  border-radius: 25px;
+  border: none;
+  font-weight: 700;
+  background-color: orange;
+  cursor: pointer;
+  margin-top: 8px;
+  background-size: 100% 100%;
+}
+
+.logou_button {
+  width: 14rem;
+  height: 3rem;
+  font-size: 20px;
+  border-radius: 25px;
+  border: none;
+  font-weight: 700;
+  background-color: orange;
+  cursor: pointer;
+  margin-top: 8px;
+  background-size: 100% 100%;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mainpopup {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup_box {
+  margin: 1rem 23rem;
+  background-color: black;
+  width: 38rem;
+  top: 0;
+  left: 0;
+  position: absolute;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  padding: 30px 20px;
+  max-height: 35rem;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+.popup_box_day {
+  margin: 1rem 23rem;
+  background-color: white;
+  width: 38rem;
+  top: 0;
+  left: 0;
+  position: absolute;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  padding: 30px 20px;
+  max-height: 35rem;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+@media only screen and (max-width: 1000px) {
+  body {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  body::-webkit-scrollbar {
+    display: none;
+  }
+  .Header {
+    width: 21rem;
+    position: fixed;
+    display: none;
+    flex-direction: column;
+    border-right: 1px solid rgb(85, 83, 83);
+  }
+}

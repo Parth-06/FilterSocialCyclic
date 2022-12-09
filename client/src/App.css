@@ -1,0 +1,46 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap");
+
+.for_link {
+  list-style-type: none;
+  text-decoration: none !important;
+  color: rgb(216, 214, 214);
+}
+
+.for_link_day {
+  list-style-type: none;
+  text-decoration: none !important;
+  color: black;
+}
+
+.main {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  position: fixed;
+  overflow: hidden;
+  background-color: black;
+  color: rgb(216, 214, 214);
+}
+
+.main_day {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  position: fixed;
+  overflow: hidden;
+  background-color: white;
+  color: black;
+}
+
+.spinnerstyle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80%;
+}
+.fa-heart-broken {
+  font-size: 70px;
+  margin-bottom: 1rem;
+}
