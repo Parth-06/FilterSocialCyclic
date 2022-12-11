@@ -1,12 +1,25 @@
-import React, { memo } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { TweetVal } from "../../Context/FetchContext";
+import useFetchConnect from "../CustomHooks/useFetchConnect";
+import useFetchToken from "../CustomHooks/UseFetchToken";
 import Spinner from "../Spinner";
 import "./Connect.css";
 
-const Connectcompo = ({ userDetails, userdata }) => {
+const Connectcompo = () => {
   const { dispatch } = TweetVal();
+  const [userDetails, setUserDetails] = useState([]);
+  const [userdata, setUserdata] = useState([]);
+  const [userTokenData] = useFetchToken();
+  const [connectuserdata] = useFetchConnect();
 
+  useEffect(() => {
+    setUserDetails(userTokenData);
+  }, [userTokenData]);
+
+  useEffect(() => {
+    setUserdata(connectuserdata);
+  }, [connectuserdata]);
   const {
     Emojitate: { Night },
   } = TweetVal();

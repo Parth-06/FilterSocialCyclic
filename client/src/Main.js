@@ -19,6 +19,7 @@ import UserFollowers from "./Components/Followers/UserFollowers";
 import MobileTextCompo from "./Components/Home/MobileTextCompo";
 import Logout from "./Components/Logout/Logout";
 import Photo from "./Components/Profile/Photo";
+import HomeFollow from "./Components/HomeFollow";
 
 const Main = () => {
   return (
@@ -44,6 +45,7 @@ const Main = () => {
           <Route path="/logout" element={<Logout />} />
           <Route path="/photo" element={<Photo />} />
         </Routes>
+        <HomeFollow />
       </HashRouter>
       <ToastContainer
         position="top-center"
