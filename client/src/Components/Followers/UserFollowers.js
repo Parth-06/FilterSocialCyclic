@@ -1,22 +1,28 @@
 import React, { memo, useEffect, useState } from "react";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { TweetVal } from "../../Context/FetchContext";
-import useFetch from "../CustomHooks/useFetch";
 import useFetchConnect from "../CustomHooks/useFetchConnect";
+import useFetchToken from "../CustomHooks/UseFetchToken";
 import Spinner from "../Spinner";
 import "./Followers.css";
+
 const UserFollowers = () => {
   const navigate = useNavigate();
-  const { dispatch, newuserData } = TweetVal();
+  const { dispatch } = TweetVal();
   const [userdata] = useFetchConnect();
-  const [userDetails] = useFetch();
   const location = useLocation();
   const { data } = location.state;
   const [dataa, setdataa] = useState(data);
   const [userProfileDetails, setUserProfileDetails] = useState([]);
+  const [userTokenData] = useFetchToken();
+  const [userDetails, setUserDetails] = useState([]);
   const {
     Emojitate: { Night },
   } = TweetVal();
+
+  useEffect(() => {
+    setUserDetails(userTokenData);
+  }, [userTokenData]);
 
   useEffect(() => {
     const FetchProfile = async () => {
@@ -31,18 +37,39 @@ const UserFollowers = () => {
       setUserProfileDetails(data.user);
     };
     FetchProfile();
-  }, [newuserData]);
+  }, []);
 
   let alldata = userdata;
   if (userdata && userProfileDetails.followers !== undefined) {
     alldata = alldata.filter((items) =>
       userProfileDetails.followers.includes(items.username)
     );
-  } else {
-    console.log("undified");
   }
-  let newtweetdata = alldata;
 
+  let newtweetdata = alldata;
+  const follow = (username) => {
+    let follow = {
+      ...userDetails,
+      following: [...userDetails.following, username],
+    };
+    setUserDetails(follow);
+    dispatch({
+      type: "FOLLOW",
+      payload: username,
+    });
+  };
+
+  const unfollow = (username) => {
+    let unfollow = {
+      ...userDetails,
+      following: [...userDetails.following.filter((item) => item !== username)],
+    };
+    setUserDetails(unfollow);
+    dispatch({
+      type: "UNFOLLOW",
+      payload: username,
+    });
+  };
   return (
     <>
       {userDetails.following === undefined ? (
@@ -129,12 +156,7 @@ const UserFollowers = () => {
                     {userDetails.following.includes(item.username) ? (
                       <button
                         className="profile_button"
-                        onClick={() =>
-                          dispatch({
-                            type: "UNFOLLOW",
-                            payload: item.username,
-                          })
-                        }
+                        onClick={() => unfollow(item.username)}
                         disabled={item.username === userDetails.username}
                       >
                         Unfollow
@@ -142,12 +164,7 @@ const UserFollowers = () => {
                     ) : (
                       <button
                         className="profile_button"
-                        onClick={() =>
-                          dispatch({
-                            type: "FOLLOW",
-                            payload: item.username,
-                          })
-                        }
+                        onClick={() => follow(item.username)}
                         disabled={item.username === userDetails.username}
                       >
                         Follow

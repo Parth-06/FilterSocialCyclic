@@ -124,7 +124,7 @@ const UserProfile = () => {
       payload: username,
     });
     setTimeout(() => {
-      setfetchprofile("unfollow");
+      setfetchprofile("follow");
     }, 500);
   };
 
