@@ -123,7 +123,9 @@ const UserProfile = () => {
       type: "FOLLOW",
       payload: username,
     });
-    setfetchprofile("follow");
+    setTimeout(() => {
+      setfetchprofile("unfollow");
+    }, 500);
   };
 
   const unfollow = (username) => {
@@ -136,7 +138,9 @@ const UserProfile = () => {
       type: "UNFOLLOW",
       payload: username,
     });
-    setfetchprofile("unfollow");
+    setTimeout(() => {
+      setfetchprofile("unfollow");
+    }, 500);
   };
   return (
     <>

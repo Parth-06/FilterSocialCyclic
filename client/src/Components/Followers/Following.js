@@ -1,20 +1,24 @@
-import React, { memo } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import useFetch from "../CustomHooks/useFetch";
 import useFetchConnect from "../CustomHooks/useFetchConnect";
 import Spinner from "../Spinner";
 import "./Followers.css";
 import { TweetVal } from "../../Context/FetchContext";
+import useFetchToken from "../CustomHooks/UseFetchToken";
 
 const Following = () => {
   const navigate = useNavigate();
   const { dispatch } = TweetVal();
   const [userdata] = useFetchConnect();
-  const [userDetails] = useFetch();
+  const [userTokenData] = useFetchToken();
+  const [userDetails, setUserDetails] = useState([]);
   const {
     Emojitate: { Night },
   } = TweetVal();
-  console.log("Following", userdata);
+
+  useEffect(() => {
+    setUserDetails(userTokenData);
+  }, [userTokenData]);
 
   let alldata = userdata;
   if (userdata) {
@@ -24,6 +28,29 @@ const Following = () => {
   }
   let newtweetdata = alldata;
 
+  const follow = (username) => {
+    let follow = {
+      ...userDetails,
+      following: [...userDetails.following, username],
+    };
+    setUserDetails(follow);
+    dispatch({
+      type: "FOLLOW",
+      payload: username,
+    });
+  };
+
+  const unfollow = (username) => {
+    let unfollow = {
+      ...userDetails,
+      following: [...userDetails.following.filter((item) => item !== username)],
+    };
+    setUserDetails(unfollow);
+    dispatch({
+      type: "UNFOLLOW",
+      payload: username,
+    });
+  };
   return (
     <>
       {userDetails.followers === undefined &&
@@ -111,24 +138,14 @@ const Following = () => {
                     {userDetails.following.includes(item.username) ? (
                       <button
                         className="profile_button"
-                        onClick={() =>
-                          dispatch({
-                            type: "UNFOLLOW",
-                            payload: item.username,
-                          })
-                        }
+                        onClick={() => unfollow(item.username)}
                       >
                         Unfollow
                       </button>
                     ) : (
                       <button
                         className="profile_button"
-                        onClick={() =>
-                          dispatch({
-                            type: "FOLLOW",
-                            payload: item.username,
-                          })
-                        }
+                        onClick={() => follow(item.username)}
                       >
                         Follow
                       </button>

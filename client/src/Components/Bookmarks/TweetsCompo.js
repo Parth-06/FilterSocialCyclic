@@ -11,7 +11,6 @@ const TweetsCompo = () => {
   const [userTokenData] = useFetchToken();
   const [tweetdata, setTweetdata] = useState([]);
   const [userDetails, setUserDetails] = useState([]);
-  console.log(tweetdata, userDetails);
 
   let alldata = tweetdata;
   if (tweetdata && userDetails.bookmark === undefined) {
@@ -24,7 +23,6 @@ const TweetsCompo = () => {
 
   useEffect(() => {
     setUserDetails(userTokenData);
-    console.log("called token");
   }, [userTokenData]);
 
   useEffect(() => {
@@ -35,7 +33,6 @@ const TweetsCompo = () => {
           "Content-Type": "application/json",
         },
       });
-      console.log("called fetch tweet");
       const data = await res.json();
       setTweetdata(data);
     };

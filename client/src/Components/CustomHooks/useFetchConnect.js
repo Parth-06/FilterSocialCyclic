@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
-import { TweetVal } from "../../Context/FetchContext";
 
 const useFetchConnect = () => {
-  const { newuserData } = TweetVal();
   const [userdata, setUserdata] = useState([]);
   useEffect(() => {
     const Fetchtweet = async () => {
@@ -17,7 +15,7 @@ const useFetchConnect = () => {
       setUserdata(data);
     };
     Fetchtweet();
-  }, [newuserData]);
+  }, []);
 
   return [userdata];
 };
