@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import useFetch from "../CustomHooks/useFetch";
 import useFetchConnect from "../CustomHooks/useFetchConnect";
@@ -153,4 +153,4 @@ const Followers = () => {
   );
 };
 
-export default Followers;
+export default memo(Followers);

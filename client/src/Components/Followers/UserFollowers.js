@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { TweetVal } from "../../Context/FetchContext";
 import useFetch from "../CustomHooks/useFetch";
@@ -164,4 +164,4 @@ const UserFollowers = () => {
   );
 };
 
-export default UserFollowers;
+export default memo(UserFollowers);

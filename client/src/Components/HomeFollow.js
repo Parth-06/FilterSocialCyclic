@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { TweetVal } from "../Context/FetchContext";
 import Connectcompo from "./Connect/Connectcompo";
@@ -81,4 +81,4 @@ const HomeFollow = () => {
   );
 };
 
-export default HomeFollow;
+export default memo(HomeFollow);

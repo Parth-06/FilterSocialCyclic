@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Spinner from "../Spinner";
 import { TweetVal } from "../../Context/FetchContext";
@@ -213,4 +213,4 @@ const TweetsCompo = () => {
   );
 };
 
-export default TweetsCompo;
+export default memo(TweetsCompo);

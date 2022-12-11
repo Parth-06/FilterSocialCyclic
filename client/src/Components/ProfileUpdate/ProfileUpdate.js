@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./ProfileUpdate.css";
 import { toast } from "react-toastify";
@@ -159,4 +159,4 @@ const ProfileUpdate = () => {
   );
 };
 
-export default ProfileUpdate;
+export default memo(ProfileUpdate);

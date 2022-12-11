@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { Link } from "react-router-dom";
 import { TweetVal } from "../../Context/FetchContext";
 import Spinner from "../Spinner";
@@ -92,4 +92,4 @@ const Connectcompo = ({ userDetails, userdata }) => {
   );
 };
 
-export default Connectcompo;
+export default memo(Connectcompo);

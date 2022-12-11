@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { TweetVal } from "../../Context/FetchContext";
 import UserTweetsCompo from "./UserTweetsCompo";
 import useFetchToken from "../CustomHooks/UseFetchToken";
@@ -40,4 +40,4 @@ const TweetComponent = () => {
   );
 };
 
-export default TweetComponent;
+export default memo(TweetComponent);

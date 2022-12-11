@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { TweetVal } from "../../Context/FetchContext";
 import useFetch from "../CustomHooks/useFetch";
@@ -48,4 +48,4 @@ const Connect = () => {
   );
 };
 
-export default Connect;
+export default memo(Connect);
