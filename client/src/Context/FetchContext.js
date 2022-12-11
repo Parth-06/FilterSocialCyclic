@@ -11,24 +11,8 @@ import { EmojiReducer, LikesReducer } from "../Reducers/Reducer";
 const FetchContext = createContext();
 
 const FetchContextProvider = ({ children }) => {
-  const [apidata, setApidata] = useState([]);
   const [newData, setnewData] = useState([]);
   const [newuserData, setUserNewData] = useState([]);
-
-  useEffect(() => {
-    const Fetchtweet = async () => {
-      const res = await fetch("/alltweets", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      console.log("called from context");
-      const data = await res.json();
-      setApidata(data);
-    };
-    Fetchtweet();
-  }, [newData]);
 
   useEffect(() => {
     const pusher = new Pusher("bfad7d924b358ce37229", {
@@ -80,7 +64,6 @@ const FetchContextProvider = ({ children }) => {
       value={{
         state,
         dispatch,
-        apidata,
         newData,
         newuserData,
         Emojitate,
