@@ -29,7 +29,7 @@ const Logout = () => {
       }
     };
     Logoutpage();
-  });
+  }, []);
   return <></>;
 };
 

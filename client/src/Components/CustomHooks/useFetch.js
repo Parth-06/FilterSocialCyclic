@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { TweetVal } from "../../Context/FetchContext";
 const useFetch = () => {
-  const { newData } = TweetVal();
+  const { newuserData } = TweetVal();
   const [userDetails, setUserDetails] = useState([""]);
   const navigate = useNavigate();
   useEffect(() => {
@@ -30,7 +30,7 @@ const useFetch = () => {
       }
     };
     Callmainpage();
-  }, [newData]);
+  }, [newuserData]);
   return [userDetails];
 };
 

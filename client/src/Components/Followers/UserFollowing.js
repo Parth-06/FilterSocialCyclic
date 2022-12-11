@@ -7,7 +7,7 @@ import Spinner from "../Spinner";
 import "./Followers.css";
 const UserFollowing = () => {
   const navigate = useNavigate();
-  const { dispatch, newData } = TweetVal();
+  const { dispatch, newuserData } = TweetVal();
   const [userdata] = useFetchConnect();
   const [userDetails] = useFetch();
   const location = useLocation();
@@ -31,7 +31,7 @@ const UserFollowing = () => {
       setUserProfileDetails(data.user);
     };
     FetchProfile();
-  }, [newData]);
+  }, [newuserData]);
 
   let alldata = userdata;
   if (userdata && userProfileDetails.following !== undefined) {

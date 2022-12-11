@@ -14,7 +14,7 @@ const UserProfile = () => {
   const [userProfileDetails, setUserProfileDetails] = useState([]);
   const { username } = useParams();
   const [userDetails, setUserDetails] = useState([]);
-  const { dispatch, newData } = TweetVal();
+  const { dispatch, newData, newuserData } = TweetVal();
   const [userTokenData] = useFetch();
 
   useEffect(() => {
@@ -42,7 +42,7 @@ const UserProfile = () => {
       setUserProfileDetails(data.user);
     };
     FetchProfile();
-  }, [newData]);
+  }, [newuserData]);
 
   useEffect(() => {
     const Fetchtprofdetails = async () => {

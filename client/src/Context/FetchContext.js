@@ -13,6 +13,7 @@ const FetchContext = createContext();
 const FetchContextProvider = ({ children }) => {
   const [apidata, setApidata] = useState([]);
   const [newData, setnewData] = useState([]);
+  const [newuserData, setUserNewData] = useState([]);
 
   useEffect(() => {
     const Fetchtweet = async () => {
@@ -56,7 +57,7 @@ const FetchContextProvider = ({ children }) => {
     const channelfollow = pusher.subscribe("updatingFollow");
     channelfollow.bind("updated", (followData) => {
       if (followData) {
-        setnewData(followData);
+        setUserNewData(followData);
       }
     });
   }, []);
@@ -76,7 +77,15 @@ const FetchContextProvider = ({ children }) => {
   });
   return (
     <FetchContext.Provider
-      value={{ state, dispatch, apidata, newData, Emojitate, Emojidispatch }}
+      value={{
+        state,
+        dispatch,
+        apidata,
+        newData,
+        newuserData,
+        Emojitate,
+        Emojidispatch,
+      }}
     >
       {children}
     </FetchContext.Provider>

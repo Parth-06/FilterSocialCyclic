@@ -2,11 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { TweetVal } from "../Context/FetchContext";
 import Connectcompo from "./Connect/Connectcompo";
-import useFetchConnect from "./CustomHooks/useFetchConnect";
 import "./HomeFollow.css";
 
 const HomeFollow = () => {
-  const { newData } = TweetVal();
+  const { newData, newuserData } = TweetVal();
   const location = useLocation();
   const [userDetails, setUserDetails] = useState([]);
   const [userdata, setUserdata] = useState([]);
@@ -14,6 +13,7 @@ const HomeFollow = () => {
     Emojitate: { Emoji, Night },
     Emojidispatch,
   } = TweetVal();
+
   useEffect(() => {
     const Callmainpage = async () => {
       try {
@@ -36,7 +36,7 @@ const HomeFollow = () => {
       }
     };
     Callmainpage();
-  }, [newData]);
+  }, [newuserData]);
 
   useEffect(() => {
     const Fetchtweet = async () => {
@@ -51,7 +51,8 @@ const HomeFollow = () => {
       setUserdata(data);
     };
     Fetchtweet();
-  }, [newData]);
+  }, [newuserData]);
+
   console.log("homefollw", userdata);
   if (location.pathname !== "/") return null;
   return (

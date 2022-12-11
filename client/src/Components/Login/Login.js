@@ -31,7 +31,6 @@ const Login = () => {
       toast.error("Invaid Login Details");
     } else {
       toast.success("Login successfully");
-      //  dispatch({type:"USER", payload:true})
       navigate("/");
     }
   };
@@ -61,7 +60,6 @@ const Login = () => {
       toast.error("Invaid Login Details");
     } else {
       toast.success("Login successfully");
-      //  dispatch({type:"USER", payload:true})
       navigate("/");
     }
   };
