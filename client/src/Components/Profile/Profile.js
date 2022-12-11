@@ -14,7 +14,6 @@ const Profile = () => {
   const {
     Emojitate: { Night },
     dispatch,
-    newData,
   } = TweetVal();
   const [tweetdata, setTweetdata] = useState([]);
   const [userDetails] = useFetchToken();
@@ -82,6 +81,26 @@ const Profile = () => {
     );
   };
 
+  // const UnBookmark = (id) => {
+  //   const nid = userDetails.bookmark.indexOf(id);
+  //   const remove = userDetails.bookmark.splice(nid, 1);
+  //   let nbkdata = { ...userDetails, bookmark: [...userDetails.bookmark] };
+  //   let newbkdataa = { ...nbkdata };
+  //   setUserDetails(nbkdata);
+  //   dispatch({
+  //     type: "UnBookmark",
+  //     payload: id,
+  //   });
+  // };
+
+  // const Bookmark = (id) => {
+  //   let newbkdata = { ...userDetails, bookmark: [...userDetails.bookmark, id] };
+  //   setUserDetails(newbkdata);
+  //   dispatch({
+  //     type: "Bookmark",
+  //     payload: id,
+  //   });
+  // };
   useEffect(() => {
     if (img) {
       const reader = new FileReader();

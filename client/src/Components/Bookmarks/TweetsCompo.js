@@ -8,7 +8,7 @@ const TweetsCompo = () => {
   const [userTokenData] = useFetchToken();
   const [tweetdata, setTweetdata] = useState([]);
   const [userDetails, setUserDetails] = useState([]);
-
+  console.log(tweetdata, userDetails);
   const {
     Emojitate: { Night },
   } = TweetVal();
@@ -38,7 +38,7 @@ const TweetsCompo = () => {
       setTweetdata(data);
     };
     Fetchtweet();
-  }, [newData]);
+  }, []);
 
   const like = (id) => {
     dispatch({
