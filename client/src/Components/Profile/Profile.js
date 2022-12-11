@@ -5,9 +5,7 @@ import "../Home/Home.css";
 import "../EditProfile/EditProfile.css";
 import { toast } from "react-toastify";
 import Spinner from "../Spinner";
-import useFetch from "../CustomHooks/useFetch";
 import { TweetVal } from "../../Context/FetchContext";
-import useFetchToken from "../CustomHooks/UseFetchToken";
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -16,7 +14,6 @@ const Profile = () => {
     dispatch,
   } = TweetVal();
   const [tweetdata, setTweetdata] = useState([]);
-  const [fetchToken] = useFetchToken();
   const [editPro, setEditPro] = useState(false);
   const [img, setimg] = useState();
   const [imgPre, setimgPre] = useState("");
@@ -24,9 +21,33 @@ const Profile = () => {
   const [bio, setBio] = useState();
   const [locationn, setLocation] = useState();
   const [userDetails, setUserDetails] = useState([]);
+  const [saved, setSaved] = useState("");
+
   useEffect(() => {
-    setUserDetails(fetchToken);
-  }, [fetchToken]);
+    const Callmainpage = async () => {
+      try {
+        const res = await fetch("/home", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          credentials: "include",
+        });
+        const user = await res.json();
+        setUserDetails(user);
+        if (!res.status === 200) {
+          const error = new Error(res.error);
+          throw error;
+        }
+      } catch (err) {
+        console.log(err);
+        toast.error(`Please Login For Better Experience `);
+        navigate("/loginRegi");
+      }
+    };
+    Callmainpage();
+  }, [saved]);
 
   useEffect(() => {
     const Fetchtweet = async () => {
@@ -128,7 +149,7 @@ const Profile = () => {
   const proimage = async () => {
     if (imgPre === "") {
       setEditPro(false);
-
+      setSaved("Saved");
       const res = await fetch("/updateprofileDetails", {
         method: "POST",
         headers: {
@@ -143,6 +164,7 @@ const Profile = () => {
       });
     } else {
       setEditPro(false);
+      setSaved("Saved Image");
       const picdata = new FormData();
       picdata.append("file", img);
       picdata.append("upload_preset", "filtersocialimages");
