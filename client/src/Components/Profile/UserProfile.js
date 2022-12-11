@@ -14,7 +14,7 @@ const UserProfile = () => {
   const [userProfileDetails, setUserProfileDetails] = useState([]);
   const { username } = useParams();
   const [userDetails, setUserDetails] = useState([]);
-  const { dispatch, newuserData } = TweetVal();
+  const { dispatch } = TweetVal();
   const [userTokenData] = useFetch();
   const [fetchprofile, setfetchprofile] = useState("");
 
