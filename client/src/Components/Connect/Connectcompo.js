@@ -2,7 +2,6 @@ import React, { memo, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { TweetVal } from "../../Context/FetchContext";
 import useFetchConnect from "../CustomHooks/useFetchConnect";
-import useFetchToken from "../CustomHooks/UseFetchToken";
 import Spinner from "../Spinner";
 import "./Connect.css";
 
@@ -10,16 +9,36 @@ const Connectcompo = () => {
   const { dispatch } = TweetVal();
   const [userDetails, setUserDetails] = useState([]);
   const [userdata, setUserdata] = useState([]);
-  const [userTokenData] = useFetchToken();
   const [connectuserdata] = useFetchConnect();
 
   useEffect(() => {
-    setUserDetails(userTokenData);
-  }, [userTokenData]);
+    const Callmainpage = async () => {
+      try {
+        const res = await fetch("/home", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          credentials: "include",
+        });
+        const user = await res.json();
+        setUserDetails(user);
+        if (!res.status === 200) {
+          const error = new Error(res.error);
+          throw error;
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    Callmainpage();
+  }, []);
 
   useEffect(() => {
     setUserdata(connectuserdata);
   }, [connectuserdata]);
+
   const {
     Emojitate: { Night },
   } = TweetVal();
@@ -28,6 +47,30 @@ const Connectcompo = () => {
     alldata = alldata.filter((items) => items.email !== userDetails.email);
   }
   let newtweetdata = alldata;
+
+  const follow = (username) => {
+    let follow = {
+      ...userDetails,
+      following: [...userDetails.following, username],
+    };
+    setUserDetails(follow);
+    dispatch({
+      type: "FOLLOW",
+      payload: username,
+    });
+  };
+
+  const unfollow = (username) => {
+    let unfollow = {
+      ...userDetails,
+      following: [...userDetails.following.filter((item) => item !== username)],
+    };
+    setUserDetails(unfollow);
+    dispatch({
+      type: "UNFOLLOW",
+      payload: username,
+    });
+  };
 
   return (
     <>
@@ -73,24 +116,14 @@ const Connectcompo = () => {
                   {userDetails.following.includes(item.username) ? (
                     <button
                       className="profile_button"
-                      onClick={() =>
-                        dispatch({
-                          type: "UNFOLLOW",
-                          payload: item.username,
-                        })
-                      }
+                      onClick={() => unfollow(item.username)}
                     >
                       Unfollow
                     </button>
                   ) : (
                     <button
                       className="profile_button"
-                      onClick={() =>
-                        dispatch({
-                          type: "FOLLOW",
-                          payload: item.username,
-                        })
-                      }
+                      onClick={() => follow(item.username)}
                     >
                       Follow
                     </button>

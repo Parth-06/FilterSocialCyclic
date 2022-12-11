@@ -230,7 +230,7 @@ const Profile = () => {
       {userDetails.bookmark === undefined ||
       newtweetdata === undefined ||
       loading ? (
-        <div className="spinnerstyle">
+        <div className="spinnerstyle" style={{ marginRight: "5rem" }}>
           <Spinner />
         </div>
       ) : (
