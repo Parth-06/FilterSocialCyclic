@@ -5,7 +5,7 @@ import Connectcompo from "./Connect/Connectcompo";
 import "./HomeFollow.css";
 
 const HomeFollow = () => {
-  const { newData, newuserData } = TweetVal();
+  const { newuserData } = TweetVal();
   const location = useLocation();
   const [userDetails, setUserDetails] = useState([]);
   const [userdata, setUserdata] = useState([]);

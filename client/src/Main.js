@@ -14,7 +14,6 @@ import ProfileUpdate from "./Components/ProfileUpdate/ProfileUpdate";
 import Followers from "./Components/Followers/Followers";
 import Following from "./Components/Followers/Following";
 import Connect from "./Components/Connect/Connect";
-import HomeFollow from "./Components/HomeFollow";
 import UserFollowing from "./Components/Followers/UserFollowing";
 import UserFollowers from "./Components/Followers/UserFollowers";
 import MobileTextCompo from "./Components/Home/MobileTextCompo";
@@ -45,7 +44,6 @@ const Main = () => {
           <Route path="/logout" element={<Logout />} />
           <Route path="/photo" element={<Photo />} />
         </Routes>
-        <HomeFollow />
       </HashRouter>
       <ToastContainer
         position="top-center"

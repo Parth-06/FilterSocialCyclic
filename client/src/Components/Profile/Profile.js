@@ -10,7 +10,7 @@ import { TweetVal } from "../../Context/FetchContext";
 
 const Profile = () => {
   const navigate = useNavigate();
-  const { dispatch, apidata } = TweetVal();
+  const { dispatch, newData } = TweetVal();
   const {
     Emojitate: { Night },
   } = TweetVal();
@@ -24,8 +24,19 @@ const Profile = () => {
   const [locationn, setLocation] = useState();
 
   useEffect(() => {
-    setTweetdata(apidata);
-  }, [apidata]);
+    const Fetchtweet = async () => {
+      const res = await fetch("/alltweets", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      const data = await res.json();
+      setTweetdata(data);
+    };
+    Fetchtweet();
+  }, [newData]);
 
   console.log("profile", tweetdata);
   let alldata = tweetdata;
