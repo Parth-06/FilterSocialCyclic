@@ -7,15 +7,17 @@ import { toast } from "react-toastify";
 import Spinner from "../Spinner";
 import useFetch from "../CustomHooks/useFetch";
 import { TweetVal } from "../../Context/FetchContext";
+import useFetchToken from "../CustomHooks/UseFetchToken";
 
 const Profile = () => {
   const navigate = useNavigate();
-  const { dispatch, newData } = TweetVal();
   const {
     Emojitate: { Night },
+    dispatch,
+    newData,
   } = TweetVal();
   const [tweetdata, setTweetdata] = useState([]);
-  const [userDetails] = useFetch();
+  const [userDetails] = useFetchToken();
   const [editPro, setEditPro] = useState(false);
   const [img, setimg] = useState();
   const [imgPre, setimgPre] = useState("");
@@ -36,7 +38,7 @@ const Profile = () => {
       setTweetdata(data);
     };
     Fetchtweet();
-  }, [newData]);
+  }, []);
 
   console.log("profile", tweetdata);
   let alldata = tweetdata;
