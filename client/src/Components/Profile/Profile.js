@@ -22,7 +22,7 @@ const Profile = () => {
   const [locationn, setLocation] = useState();
   const [userDetails, setUserDetails] = useState([]);
   const [saved, setSaved] = useState("");
-
+  const [loading, setloading] = useState(false);
   useEffect(() => {
     const Callmainpage = async () => {
       try {
@@ -149,6 +149,7 @@ const Profile = () => {
   const proimage = async () => {
     if (imgPre === "") {
       setEditPro(false);
+      setloading(true);
       const res = await fetch("/updateprofileDetails", {
         method: "POST",
         headers: {
@@ -161,10 +162,13 @@ const Profile = () => {
           location: locationn,
         }),
       });
-      setSaved("Saved");
+      if (res.status === 210) {
+        setSaved("Saved");
+        setloading(false);
+      }
     } else {
       setEditPro(false);
-      setSaved("Saved Image");
+      setloading(true);
       const picdata = new FormData();
       picdata.append("file", img);
       picdata.append("upload_preset", "filtersocialimages");
@@ -190,7 +194,10 @@ const Profile = () => {
           url: dataaa.secure_url,
         }),
       });
-      setSaved("Saved Image");
+      if (ress.status === 210) {
+        setSaved("Saved Image");
+        setloading(false);
+      }
     }
   };
 
@@ -220,7 +227,9 @@ const Profile = () => {
 
   return (
     <>
-      {userDetails.bookmark === undefined || newtweetdata === undefined ? (
+      {userDetails.bookmark === undefined ||
+      newtweetdata === undefined ||
+      loading ? (
         <div className="spinnerstyle">
           <Spinner />
         </div>
