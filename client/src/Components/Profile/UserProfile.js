@@ -14,7 +14,7 @@ const UserProfile = () => {
   const [userProfileDetails, setUserProfileDetails] = useState([]);
   const { username } = useParams();
   const [userDetails, setUserDetails] = useState([]);
-  const { dispatch, newData, newuserData } = TweetVal();
+  const { dispatch, newuserData } = TweetVal();
   const [userTokenData] = useFetch();
 
   useEffect(() => {
@@ -58,7 +58,7 @@ const UserProfile = () => {
       setTweetdata(data);
     };
     Fetchtprofdetails();
-  }, [newData]);
+  }, []);
 
   const like = (id) => {
     dispatch({
