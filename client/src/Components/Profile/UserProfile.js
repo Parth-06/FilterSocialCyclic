@@ -16,6 +16,7 @@ const UserProfile = () => {
   const [userDetails, setUserDetails] = useState([]);
   const { dispatch, newuserData } = TweetVal();
   const [userTokenData] = useFetch();
+  const [fetchprofile, setfetchprofile] = useState("");
 
   useEffect(() => {
     setUserDetails(userTokenData);
@@ -42,7 +43,7 @@ const UserProfile = () => {
       setUserProfileDetails(data.user);
     };
     FetchProfile();
-  }, [newuserData]);
+  }, [fetchprofile]);
 
   useEffect(() => {
     const Fetchtprofdetails = async () => {
@@ -113,6 +114,31 @@ const UserProfile = () => {
     });
   };
 
+  const follow = (username) => {
+    let follow = {
+      ...userDetails,
+      following: [...userDetails.following, username],
+    };
+    setUserDetails(follow);
+    dispatch({
+      type: "FOLLOW",
+      payload: username,
+    });
+    setfetchprofile("follow");
+  };
+
+  const unfollow = (username) => {
+    let unfollow = {
+      ...userDetails,
+      following: [...userDetails.following.filter((item) => item !== username)],
+    };
+    setUserDetails(unfollow);
+    dispatch({
+      type: "UNFOLLOW",
+      payload: username,
+    });
+    setfetchprofile("unfollow");
+  };
   return (
     <>
       {userDetails.bookmark === undefined ||
@@ -158,24 +184,14 @@ const UserProfile = () => {
               {userDetails.following.includes(username) ? (
                 <button
                   className="profile_button"
-                  onClick={() =>
-                    dispatch({
-                      type: "UNFOLLOW",
-                      payload: username,
-                    })
-                  }
+                  onClick={() => unfollow(userProfileDetails.username)}
                 >
                   Unfollow
                 </button>
               ) : (
                 <button
                   className="profile_button"
-                  onClick={() =>
-                    dispatch({
-                      type: "FOLLOW",
-                      payload: username,
-                    })
-                  }
+                  onClick={() => follow(userProfileDetails.username)}
                 >
                   Follow
                 </button>
