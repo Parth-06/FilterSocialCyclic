@@ -62,7 +62,7 @@ const Profile = () => {
       setTweetdata(data);
     };
     Fetchtweet();
-  }, []);
+  }, [saved]);
 
   let alldata = tweetdata;
   if (tweetdata) {
@@ -149,7 +149,6 @@ const Profile = () => {
   const proimage = async () => {
     if (imgPre === "") {
       setEditPro(false);
-      setSaved("Saved");
       const res = await fetch("/updateprofileDetails", {
         method: "POST",
         headers: {
@@ -162,6 +161,7 @@ const Profile = () => {
           location: locationn,
         }),
       });
+      setSaved("Saved");
     } else {
       setEditPro(false);
       setSaved("Saved Image");
@@ -190,6 +190,7 @@ const Profile = () => {
           url: dataaa.secure_url,
         }),
       });
+      setSaved("Saved Image");
     }
   };
 
