@@ -11,6 +11,7 @@ const UserTweetsCompo = ({ fetchedtweetdata, tokenData }) => {
     Emojitate: { Emoji, Night },
     Emojidispatch,
   } = TweetVal();
+
   useEffect(() => {
     setTweetdata(fetchedtweetdata);
   }, [fetchedtweetdata]);
@@ -63,7 +64,6 @@ const UserTweetsCompo = ({ fetchedtweetdata, tokenData }) => {
     const nid = userDetails.bookmark.indexOf(id);
     const remove = userDetails.bookmark.splice(nid, 1);
     let nbkdata = { ...userDetails, bookmark: [...userDetails.bookmark] };
-    let newbkdataa = { ...nbkdata };
     setUserDetails(nbkdata);
     dispatch({
       type: "UnBookmark",

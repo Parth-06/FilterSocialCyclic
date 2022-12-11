@@ -23,7 +23,7 @@ const FetchContextProvider = ({ children }) => {
           "Content-Type": "application/json",
         },
       });
-
+      console.log("called from context");
       const data = await res.json();
       setApidata(data);
     };

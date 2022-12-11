@@ -16,6 +16,7 @@ const useFetchToken = () => {
           credentials: "include",
         });
         const user = await res.json();
+        console.log("called custome useFetch token");
         setUserDetails(user);
         if (!res.status === 200) {
           const error = new Error(res.error);
