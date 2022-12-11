@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { TweetVal } from "../../Context/FetchContext";
 const useFetch = () => {
   const { newuserData } = TweetVal();
-  const [userDetails, setUserDetails] = useState([""]);
+  const [userDetails, setUserDetails] = useState([]);
   const navigate = useNavigate();
   useEffect(() => {
     const Callmainpage = async () => {

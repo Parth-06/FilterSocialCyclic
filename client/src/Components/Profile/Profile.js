@@ -16,13 +16,17 @@ const Profile = () => {
     dispatch,
   } = TweetVal();
   const [tweetdata, setTweetdata] = useState([]);
-  const [userDetails] = useFetchToken();
+  const [fetchToken] = useFetchToken();
   const [editPro, setEditPro] = useState(false);
   const [img, setimg] = useState();
   const [imgPre, setimgPre] = useState("");
   const [name, setName] = useState();
   const [bio, setBio] = useState();
   const [locationn, setLocation] = useState();
+  const [userDetails, setUserDetails] = useState([]);
+  useEffect(() => {
+    setUserDetails(fetchToken);
+  }, [fetchToken]);
 
   useEffect(() => {
     const Fetchtweet = async () => {
@@ -39,7 +43,6 @@ const Profile = () => {
     Fetchtweet();
   }, []);
 
-  console.log("profile", tweetdata);
   let alldata = tweetdata;
   if (tweetdata) {
     alldata = alldata.filter((items) => items.email === userDetails.email);
@@ -81,26 +84,27 @@ const Profile = () => {
     );
   };
 
-  // const UnBookmark = (id) => {
-  //   const nid = userDetails.bookmark.indexOf(id);
-  //   const remove = userDetails.bookmark.splice(nid, 1);
-  //   let nbkdata = { ...userDetails, bookmark: [...userDetails.bookmark] };
-  //   let newbkdataa = { ...nbkdata };
-  //   setUserDetails(nbkdata);
-  //   dispatch({
-  //     type: "UnBookmark",
-  //     payload: id,
-  //   });
-  // };
+  const UnBookmark = (id) => {
+    const nid = userDetails.bookmark.indexOf(id);
+    const remove = userDetails.bookmark.splice(nid, 1);
+    let nbkdata = { ...userDetails, bookmark: [...userDetails.bookmark] };
+    let newbkdataa = { ...nbkdata };
+    setUserDetails(nbkdata);
+    dispatch({
+      type: "UnBookmark",
+      payload: id,
+    });
+  };
 
-  // const Bookmark = (id) => {
-  //   let newbkdata = { ...userDetails, bookmark: [...userDetails.bookmark, id] };
-  //   setUserDetails(newbkdata);
-  //   dispatch({
-  //     type: "Bookmark",
-  //     payload: id,
-  //   });
-  // };
+  const Bookmark = (id) => {
+    let newbkdata = { ...userDetails, bookmark: [...userDetails.bookmark, id] };
+    setUserDetails(newbkdata);
+    dispatch({
+      type: "Bookmark",
+      payload: id,
+    });
+  };
+
   useEffect(() => {
     if (img) {
       const reader = new FileReader();
@@ -168,6 +172,10 @@ const Profile = () => {
   };
 
   const Delete = async (item_id) => {
+    const del = tweetdata.filter((item) => {
+      return item_id !== item.id;
+    });
+    setTweetdata(del);
     const res = await fetch("/deletedata", {
       method: "POST",
       headers: {
@@ -189,9 +197,7 @@ const Profile = () => {
 
   return (
     <>
-      {userDetails.bookmark === undefined &&
-      newtweetdata === undefined &&
-      userDetails.following ? (
+      {userDetails.bookmark === undefined || newtweetdata === undefined ? (
         <div className="spinnerstyle">
           <Spinner />
         </div>
@@ -473,22 +479,12 @@ const Profile = () => {
                           {userDetails.bookmark.includes(item.id) ? (
                             <i
                               className="fas fa-bookmark"
-                              onClick={() =>
-                                dispatch({
-                                  type: "UnBookmark",
-                                  payload: item.id,
-                                })
-                              }
+                              onClick={() => UnBookmark(item.id)}
                             ></i>
                           ) : (
                             <i
                               className="far fa-bookmark"
-                              onClick={() =>
-                                dispatch({
-                                  type: "Bookmark",
-                                  payload: item.id,
-                                })
-                              }
+                              onClick={() => Bookmark(item.id)}
                             ></i>
                           )}
                           <i

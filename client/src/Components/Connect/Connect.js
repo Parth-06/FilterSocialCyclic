@@ -13,7 +13,7 @@ const Connect = () => {
   const [userDetails, setUserDetails] = useState([]);
   const [userdata, setUserdata] = useState([]);
   const [userTokenData] = useFetch();
-  const { newData } = TweetVal();
+
   useEffect(() => {
     setUserDetails(userTokenData);
   }, [userTokenData]);
@@ -31,7 +31,7 @@ const Connect = () => {
       setUserdata(data);
     };
     Fetchtweet();
-  }, [newData]);
+  }, []);
   console.log("connect", userdata);
   return (
     <div className={Night ? "connect_home_main_day" : "connect_home_main"}>
