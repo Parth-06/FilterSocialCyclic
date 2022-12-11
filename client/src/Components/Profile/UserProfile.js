@@ -2,8 +2,8 @@ import React, { memo, useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import "./Profile.css";
 import Spinner from "../Spinner";
-import useFetch from "../CustomHooks/useFetch";
 import { TweetVal } from "../../Context/FetchContext";
+import useFetchToken from "../CustomHooks/UseFetchToken";
 
 const UserProfile = () => {
   const navigate = useNavigate();
@@ -15,13 +15,12 @@ const UserProfile = () => {
   const { username } = useParams();
   const [userDetails, setUserDetails] = useState([]);
   const { dispatch } = TweetVal();
-  const [userTokenData] = useFetch();
+  const [userTokenData] = useFetchToken();
   const [fetchprofile, setfetchprofile] = useState("");
 
   useEffect(() => {
     setUserDetails(userTokenData);
   }, [userTokenData]);
-  console.log("userprofile", tweetdata);
   let alldata = tweetdata;
   if (tweetdata) {
     alldata = alldata.filter(
